@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dkopihcpcs7um" path="res://scenes/enemy_spawner.tscn" id="3_h1ty0"]
 [ext_resource type="AudioStream" uid="uid://ch7qdifwopvh7" path="res://assets/audio/hit.wav" id="6_263qs"]
 [ext_resource type="AudioStream" uid="uid://dt37nx0pyd2l1" path="res://assets/audio/explode.wav" id="7_efxok"]
-[ext_resource type="AudioStream" uid="uid://nsj0ffr7s6no" path="res://assets/audio/music.wav" id="8_jsd2o"]
 [ext_resource type="AudioStream" uid="uid://qewdm7ln4afo" path="res://assets/audio/game_over.wav" id="9_8307x"]
+[ext_resource type="AudioStream" uid="uid://mkt5o7384m8j" path="res://assets/audio/music.ogg" id="9_j30yf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0jbj"]
 size = Vector2(82, 758)
@@ -50,13 +50,13 @@ stream = ExtResource("6_263qs")
 [node name="PlayerDamagedSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_efxok")
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_jsd2o")
-volume_db = -20.0
-autoplay = true
-
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_8307x")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_j30yf")
+volume_db = -20.0
+autoplay = true
 
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
 [connection signal="enemy_spawn" from="EnemySpawner" to="." method="_on_enemy_spawner_enemy_spawn"]

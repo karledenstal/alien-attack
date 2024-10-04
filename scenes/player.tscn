@@ -43,7 +43,6 @@ script = ExtResource("1_7w51o")
 
 [node name="FlameParticleEffect" type="GPUParticles2D" parent="."]
 position = Vector2(-34, 1.45519e-11)
-scale = Vector2(1, 1)
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_hdljo")
 lifetime = 0.3
