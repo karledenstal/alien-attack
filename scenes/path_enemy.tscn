@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://jvs0aaimqi18"]
+
+[ext_resource type="PackedScene" uid="uid://chyr6aqv31gde" path="res://scenes/enemy.tscn" id="1_ptgdi"]
+[ext_resource type="Texture2D" uid="uid://cv34nio3yv386" path="res://assets/textures/enemy_ship_2.png" id="2_k34pq"]
+
+[sub_resource type="Curve2D" id="Curve2D_eer16"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -71, 697, -89.797, 13.4695, 89.797, -13.4695, 536, 629, -24.6942, 53.8782, 24.6942, -53.8782, 835, 480, -50.5108, 40.4086, 50.5108, -40.4086, 1034, 315, -40.4086, 52.7557, 40.4086, -52.7557, 1168, 183, 0, 0, 0, 0, 1348, -48)
+}
+point_count = 6
+
+[sub_resource type="GDScript" id="GDScript_fc72i"]
+script/source = "extends Path2D
+
+@onready var path_follow = $PathFollow2D
+@onready var enemy = $PathFollow2D/Enemy
+
+func _ready() -> void:
+	path_follow.set_progress_ratio(1)
+	
+func _process(delta: float) -> void:
+	path_follow.progress_ratio -= 0.25 * delta
+	
+	if path_follow.progress_ratio <= 0:
+		queue_free()
+"
+
+[node name="PathEnemy" type="Path2D"]
+curve = SubResource("Curve2D_eer16")
+script = SubResource("GDScript_fc72i")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(1348, -48)
+rotation = -0.908855
+progress = 1692.9
+loop = false
+
+[node name="Enemy" parent="PathFollow2D" instance=ExtResource("1_ptgdi")]
+speed = 0
+
+[node name="Sprite2D" parent="PathFollow2D/Enemy" index="0"]
+texture = ExtResource("2_k34pq")
+
+[node name="CollisionShape2D" parent="PathFollow2D/Enemy" index="1"]
+position = Vector2(1.40338, 0.174061)
+
+[node name="CollisionShape2D2" parent="PathFollow2D/Enemy" index="2"]
+position = Vector2(9.20942, 0.430143)
+
+[node name="CollisionShape2D3" parent="PathFollow2D/Enemy" index="3"]
+position = Vector2(41.3966, -0.563496)
+
+[editable path="PathFollow2D/Enemy"]

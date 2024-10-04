@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnnsbac3tkfpr"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_7w51o"]
+[ext_resource type="Texture2D" uid="uid://dy21hxo55et0h" path="res://assets/textures/player_ship.png" id="1_jin1l"]
+[ext_resource type="AudioStream" uid="uid://df3sbq7h772jr" path="res://assets/audio/sfx_laser2.wav" id="3_b1mel"]
+
+[sub_resource type="Gradient" id="Gradient_wg0oo"]
+offsets = PackedFloat32Array(0, 0.532787, 1)
+colors = PackedColorArray(1, 0.566667, 0, 0, 1, 0.333333, 0, 1, 1, 0.133333, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4xbcd"]
+gradient = SubResource("Gradient_wg0oo")
+
+[sub_resource type="Curve" id="Curve_oiybr"]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yi5sl"]
+curve = SubResource("Curve_oiybr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hdljo"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 15, 1)
+spread = 30.0
+initial_velocity_min = -200.0
+initial_velocity_max = -200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_yi5sl")
+color_ramp = SubResource("GradientTexture1D_4xbcd")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k1hn2"]
+radius = 19.0
+height = 102.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_7w51o")
+
+[node name="FlameParticleEffect" type="GPUParticles2D" parent="."]
+position = Vector2(-34, 1.45519e-11)
+scale = Vector2(1, 1)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_hdljo")
+lifetime = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_jin1l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -2)
+shape = SubResource("CapsuleShape2D_k1hn2")
+
+[node name="RocketContainer" type="Node" parent="."]
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="RocketShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_b1mel")

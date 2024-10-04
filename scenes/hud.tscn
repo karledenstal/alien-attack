@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6ikmq2g2i5xw"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_74pv8"]
+[ext_resource type="FontFile" uid="uid://bhvwq8j7rqikq" path="res://assets/font/Kenney Blocks.ttf" id="1_wpaye"]
+[ext_resource type="Texture2D" uid="uid://cedt1juks5wte" path="res://assets/textures/orb.png" id="3_tfyf1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wiv0v"]
+font = ExtResource("1_wpaye")
+font_size = 32
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_74pv8")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 256.0
+offset_bottom = 59.0
+text = "Score: 9999"
+label_settings = SubResource("LabelSettings_wiv0v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Life_01" type="TextureRect" parent="CanvasLayer"]
+offset_left = 4.0
+offset_top = 60.0
+offset_right = 130.0
+offset_bottom = 178.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_tfyf1")
+
+[node name="Life_02" type="TextureRect" parent="CanvasLayer"]
+offset_left = 60.0
+offset_top = 60.0
+offset_right = 186.0
+offset_bottom = 178.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_tfyf1")
+
+[node name="Life_03" type="TextureRect" parent="CanvasLayer"]
+offset_left = 116.0
+offset_top = 60.0
+offset_right = 242.0
+offset_bottom = 178.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_tfyf1")
