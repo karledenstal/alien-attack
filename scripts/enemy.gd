@@ -1,8 +1,6 @@
 extends Area2D
 
-var min_speed = 300
-var max_speed = 700
-@export var speed = randi_range(min_speed, max_speed)
+@export var speed = 300
 signal died(scoreable: bool)
 
 func _physics_process(delta: float) -> void:
